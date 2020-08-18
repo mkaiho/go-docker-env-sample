@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  go-workspace:
+    build:
+      context: ./docker/workspace
+      dockerfile: Dockerfile
+    container_name: go-workspace-local
+    ports:
+      - 9000:8080
+    tty: true
+    working_dir: /app/workspace
+    volumes:
+      - .:/app/workspace
+    environment:
+      GOPATH: /app/workspace
