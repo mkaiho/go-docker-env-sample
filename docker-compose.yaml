@@ -12,5 +12,3 @@ services:
     working_dir: /workspace/app
     volumes:
       - .:/workspace/app
-    environment:
-      GOPATH: /workspace/app

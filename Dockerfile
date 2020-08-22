@@ -1,18 +1,16 @@
 FROM golang:1.15.0-buster as builder
 
-ENV GOPATH=/workspace/app
-ENV APP_NAME=sample_web_app
-
 WORKDIR /workspace/app
 
-COPY ./src ./src
+COPY ./go.mod ./
+COPY ./cmd ./cmd
 
-RUN go install $APP_NAME
+RUN go build ./cmd/api/main.go
 
 FROM debian:buster-20200803-slim
 
 WORKDIR /app
 
-COPY --from=builder /workspace/app/bin ./bin
+COPY --from=builder /workspace/app/main ./
 
-CMD [ "./bin/sample_web_app" ]
+CMD [ "./main" ]
